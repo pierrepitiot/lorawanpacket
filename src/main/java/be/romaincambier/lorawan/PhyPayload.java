@@ -41,7 +41,7 @@ public class PhyPayload implements Binarizable {
 
     private final MHDR mhdr;
     private final Message message;
-    private final byte[] mic;
+    private byte[] mic;
 
     private PhyPayload(ByteBuffer _raw) throws MalformedPacketException {
         _raw.order(ByteOrder.LITTLE_ENDIAN);
@@ -86,7 +86,11 @@ public class PhyPayload implements Binarizable {
         return mic;
     }
 
-    @Override
+    public void setMic(byte[] _mic) {
+        this.mic = _mic;
+    }
+
+   @Override
     public int length() {
         return 1 + message.length() + 4;
     }
